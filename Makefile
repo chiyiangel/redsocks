@@ -9,11 +9,7 @@ DEPS := .depend
 OUT := redsocks
 VERSION := 0.5
 
-LIBS := -levent_core
-ifeq ($(DBG_BUILD),1)
-# -levent_extra is required only for `http` and `debug`
-LIBS += -levent_extra
-endif
+LIBS := -levent
 CFLAGS += -g -O2
 # _GNU_SOURCE is used to get splice(2), it also implies _BSD_SOURCE
 override CFLAGS += -std=c99 -D_XOPEN_SOURCE=600 -D_DEFAULT_SOURCE -D_GNU_SOURCE -Wall
