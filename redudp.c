@@ -361,6 +361,12 @@ static void redudp_read_assoc_reply(struct bufferevent *buffev, void *_arg)
 		goto fail;
 	}
 
+	error = fcntl_nonblock(fd);
+	if (error) {
+		log_errno(LOG_ERR, "fcntl");
+		goto fail;
+	}
+
 	error = connect(fd, (struct sockaddr*)&client->udprelayaddr, sizeof(client->udprelayaddr));
 	if (error) {
 		redudp_log_errno(client, LOG_NOTICE, "connect");
